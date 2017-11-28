@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 不配置版本号，会默认使用最新版的版本 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 扫描表现层类包 -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.gcdemo.controller" />
+	<!-- 静态资源存放位置 -->
+	<mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
+	<!-- 将静态资源的处理经由Spring MVC框架交回Web应用服务器处理 -->
+	<mvc:default-servlet-handler />
+	<!-- 注解支持 -->
+	<mvc:annotation-driven />
+	<!-- 指定返回view的地址 -->
+	<bean id="internalResourceViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 自定义拦截链配置 -->
+	<!--  
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*" />
+			<mvc:exclude-mapping path="/login.do" />
+			<mvc:exclude-mapping path="/init.do" />
+			<bean class="com.springmvc.demo.interceptor.SessionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	-->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+</beans>

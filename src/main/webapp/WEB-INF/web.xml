@@ -1,7 +1,44 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+  	
+	<!-- spring mvc 配置 -->
+	<listener>
+	      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+	   <param-name>contextConfigLocation</param-name>
+	   <param-value>classpath:spring/applicationContextSpringMvc.xml</param-value>
+	</context-param>
+
+
+ 	<!-- springmvc 搭建配置   所有URL请求都将被Spring MVC的DispatcherServlet截获-->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc/springmvc-demo.xml</param-value>
+		</init-param> 
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- 服务首次加载转向的页面 -->
+	<!-- web.xml中的welcome-file-list配置段仅对servlet和普通jsp页面有效 -->
+	<!-- 这里的init.do为了匹配拦截器设置/* 拦截器判断之后跳转init.do spring默认此处当成静态文件处理，不会跳转到指定的action-->
+	<welcome-file-list>
+		<welcome-file>/index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 设置session过期时间 单位 分钟 -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<display-name>LogPrintByWebsocket</display-name>
 </web-app>
