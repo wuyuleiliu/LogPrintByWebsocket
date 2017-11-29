@@ -17,6 +17,8 @@
 		<spring.version>4.3.10.RELEASE</spring.version>
 		<commons.version>3.6</commons.version>
 		<aspectjweaver.version>1.7.4</aspectjweaver.version>
+		<log4j.version>1.2.16</log4j.version>
+		<fastjson.version>1.2.32</fastjson.version>
 	</properties>
 
 	<dependencies>
@@ -105,7 +107,18 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
-
+		<!-- 日志输出 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<!-- json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
 	</dependencies>
 
 
@@ -121,7 +134,7 @@
 					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<excludes>
-						<exclude>*Test.java</exclude>
+						<exclude>**/Test.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

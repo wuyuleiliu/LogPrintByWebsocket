@@ -7,7 +7,7 @@
 
 <meta charset="utf-8">
 <title>服务器日志</title>
-<script src='./assets/javascripts/jquery/jquery.min.js' type='text/javascript'></script>
+<script src='./assets/js/jquery.min.js' type='text/javascript'></script>
 <script  type="text/javascript">
 String.prototype.replaceAll = function (FindText, RepText) {
     regExp = new RegExp(FindText, "g");
@@ -48,10 +48,10 @@ html,body{height:100%;margin:0px;}
 		//获取ip和服务器id
 		var userType = $('#userType').val();
 		var ip = $('#serviceIP').val();
-		var projectPath = $('#projectPath').val().replaceAll('/', '.');
+		var projectPath = $('#projectPath').val().replaceAll('/', '@');
 		var wsurllog = $('#wsurllog').val();
 
-		var websocket = new WebSocket(wsurllog + userType +  "/" + ip + "/" + projectPath);
+		var websocket = new WebSocket(wsurllog  +  "/log/" + userType +  "/" + ip + "/" + projectPath);
 		websocket.onmessage = function(event) {
 			//日志信息过多删除最老的数据
 			if($("#log-container div").children('p').length > 100){

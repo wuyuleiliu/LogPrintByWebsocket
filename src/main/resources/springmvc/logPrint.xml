@@ -17,7 +17,7 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.gcdemo.controller" />
 	<!-- 静态资源存放位置 -->
-	<mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
+	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
 	<!-- 将静态资源的处理经由Spring MVC框架交回Web应用服务器处理 -->
 	<mvc:default-servlet-handler />
 	<!-- 注解支持 -->
@@ -39,6 +39,7 @@
 			<bean class="com.springmvc.demo.interceptor.SessionInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	-->
+	
 	<aop:aspectj-autoproxy proxy-target-class="true" />
+	-->
 </beans>

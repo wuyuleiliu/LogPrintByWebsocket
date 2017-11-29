@@ -9,11 +9,26 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
-		
-	<!-- 扫描 -->
-	<!-- 
+
+	<!-- 用于执行线程任务的池 -->
+	<bean class="com.gcdemo.util.thread.ThreadTaskPool">
+		<property name="taskExecutor" ref="taskExecutor" />
+	</bean>
+
+	<!-- 异步线程池 -->
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数 -->
+		<property name="corePoolSize" value="5" />
+		<!-- 最大线程数 -->
+		<property name="maxPoolSize" value="20" />
+		<!-- 队列最大长度 >=mainExecutor.maxSize -->
+		<property name="queueCapacity" value="500" />
+		<!-- 线程池维护线程所允许的空闲时间 -->
+		<property name="keepAliveSeconds" value="600" />
+	</bean>
+
+	<!-- 扫描工具，service和dao -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.springmvc.demo.interceptor"></context:component-scan>
- 	-->
-		
+	<context:component-scan base-package="com.gcdemo.util"></context:component-scan>
 </beans>
