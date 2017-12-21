@@ -77,7 +77,13 @@ public class TailLogThread extends Thread {
 				// 将实时日志通过WebSocket发送给客户端，给每一行添加一个HTML换行
 				if (session.isOpen()) {
 					try {
-						session.getBasicRemote().sendText(line + "<br>");
+						// 判断是否以中文、英文、数字包括下划线开头
+						if (line.length() > 0 && !line.substring(0, 1).matches("^[\u4E00-\u9FA5A-Za-z0-9_]+$")) {
+							line = "<span style='color:red'>&emsp;&emsp;&emsp;&emsp;" + line + "</span><br>";
+						} else {
+							line = line + "<br>";
+						}
+						session.getBasicRemote().sendText(line);
 					} catch (Exception e) {
 						logger.info("session  websocket发送日志错误!");
 						logger.info("session状态：" + session.isOpen());
