@@ -77,12 +77,6 @@
 	<logger name="com.demo">
 		<level value="INFO" />
 	</logger>
-	<logger name="java.sql">
-		<level value="DEBUG" />
-	</logger>
-	<logger name="org.apache.ibatis">
-		<level value="DEBUG" />
-	</logger>
 
 	<root>
 		<priority value="INFO" />
